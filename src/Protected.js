@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import App from "./App";
 import { useNavigate, Navigate } from "react-router-dom";
-import { logIn } from "./features/authenticationSlice";
+import { logIn } from "./redux/features/authenticationSlice";
 
 const Protected = () => {
   const navigate = useNavigate();

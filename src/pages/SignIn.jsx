@@ -5,8 +5,9 @@ import {
   logIn,
   userPasswordHandler,
   userSignInUsernameorEmail,
-} from "../features/authenticationSlice";
+} from "../redux/features/authenticationSlice";
 import "../signIn.css";
+import logo from "../assets/netflixLogo.png";
 
 const SignIn = () => {
   const { error, userEmailUsername } = useSelector(
@@ -40,10 +41,7 @@ const SignIn = () => {
 
   return (
     <div className="signinImage relative flex flex-col items-center ">
-      <img
-        src="./netflixLogo.png"
-        className="absolute top-5 left-7 h-25 w-40"
-      />
+      <img src={logo} className="absolute top-5 left-7 h-25 w-40" />
       <div className=" bg-black bg-opacity-80 h-[41.25rem] w-[30.688rem] mt-[10rem]">
         <form
           action=""

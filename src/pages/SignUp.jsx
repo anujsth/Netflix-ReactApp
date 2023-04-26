@@ -7,7 +7,7 @@ import {
   passwordInput,
   storeUserDetail,
   usernameInput,
-} from "../features/userSlice";
+} from "../redux/features/userSlice";
 
 const SignUp = () => {
   const [details, setDetails] = useState({

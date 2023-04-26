@@ -7,21 +7,23 @@ import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 
 const persistConfig = {
-  key: "root",
+  key: "authentication",
   storage,
-  whitelist: ["authentication"],
+  // whitelist: ["authentication"],
+  blacklist: ["error", "likedMovie"],
 };
 
 const rootReducers = combineReducers({
-  authentication: authenticationReducer,
+  authentication: persistReducer(persistConfig, authenticationReducer),
   user: userReducer,
   movieDetail: movieDetailReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducers);
+// const persistedReducer = persistReducer(persistConfig, authenticationReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducers,
+  middleware: [thunk],
 });
 
 export const persistor = persistStore(store);

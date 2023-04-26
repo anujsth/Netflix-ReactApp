@@ -3,12 +3,13 @@ import { BsFillHeartFill } from "react-icons/bs";
 // import MoviePlayer from "./MoviePlayer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setMovieId, setMovieName } from "../features/movieDetailSlice";
+import { setMovieId, setMovieName } from "../redux/features/movieDetailSlice";
+import { likeHandler } from "../redux/features/authenticationSlice";
 
 const Movie = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const heartClick = useRef(null);
   //   const [mouseEnter, setMouseEnter] = useState(false);
   //   const onMouseEnter = () => {
   //     setMouseEnter(true);
@@ -20,6 +21,12 @@ const Movie = ({ item }) => {
     navigate(`/video/${item.id}`);
     dispatch(setMovieName(item.title));
     dispatch(setMovieId(item.id));
+  };
+  const likeHandlerButton = (event) => {
+    if (heartClick.current === event.currentTarget) {
+      dispatch(likeHandler(item));
+    }
+    event.stopPropagation();
   };
 
   return (
@@ -37,7 +44,14 @@ const Movie = ({ item }) => {
         />
 
         <div className="w-full h-full top-0 left-0 absolute hover:opacity-100 opacity-0 hover:bg-black/80 text-white">
-          <BsFillHeartFill className="text-white absolute top-1 left-2 hover:scale-125" />
+          <div
+            ref={heartClick}
+            onClick={likeHandlerButton}
+            className=" absolute top-1 left-2 hover:scale-125 h-[16px] w-[16px]"
+          >
+            <BsFillHeartFill className="text-white" />
+          </div>
+
           <p className="white-space-normal text-white text-xs md:text-sm flex justify-center items-center h-full font-bold">
             {item?.title}
           </p>
