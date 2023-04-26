@@ -1,24 +1,25 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "../signIn.css";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import {
   logIn,
   userPasswordHandler,
   userSignInUsernameorEmail,
 } from "../features/authenticationSlice";
+import "../signIn.css";
 
 const SignIn = () => {
   const { error, userEmailUsername } = useSelector(
     (state) => state.authentication
   );
-  console.log(error);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signInDetail, setSignInDetail] = useState({
     userameOrEmail: "",
     password: "",
   });
+
   const inputUserHandler = (event) => {
     setSignInDetail({
       ...signInDetail,
@@ -36,6 +37,7 @@ const SignIn = () => {
     dispatch(userPasswordHandler(signInDetail.password));
     dispatch(logIn());
   };
+
   return (
     <div className="signinImage relative flex flex-col items-center ">
       <img

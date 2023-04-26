@@ -17,17 +17,24 @@ const authenticationSlice = createSlice({
     },
     logIn: (state) => {
       const userDetails = JSON.parse(localStorage.getItem("users"));
-      userDetails.filter((item) =>
-        item.username == state.userEmailUsername &&
-        item.password == state.userPassword
-          ? (state.loggedIn = true)
-          : (state.error = "User not found")
-      );
+      userDetails.filter((item) => {
+        if (
+          item.username == state.userEmailUsername &&
+          item.password == state.userPassword
+        ) {
+          state.loggedIn = true;
+          // localStorage.setItem("login", 1);
+        } else {
+          state.error = "User not found";
+        }
+      });
+
       // state.loggedIn = true;
     },
     logOut: (state) => {
       state.loggedIn = false;
       state.error = " ";
+      // localStorage.removeItem("login");
     },
   },
 });

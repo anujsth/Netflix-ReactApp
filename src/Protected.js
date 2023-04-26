@@ -1,11 +1,13 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import App from "./App";
 import { useNavigate, Navigate } from "react-router-dom";
+import { logIn } from "./features/authenticationSlice";
 
 const Protected = () => {
   const navigate = useNavigate();
   const { loggedIn } = useSelector((state) => state.authentication);
+
   if (!loggedIn) {
     return <Navigate to="/signin" replace />;
   } else {

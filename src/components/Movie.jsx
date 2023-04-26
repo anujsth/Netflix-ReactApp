@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsFillHeartFill } from "react-icons/bs";
 // import MoviePlayer from "./MoviePlayer";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { setMovieId, setMovieName } from "../features/movieDetailSlice";
 const Movie = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   //   const [mouseEnter, setMouseEnter] = useState(false);
   //   const onMouseEnter = () => {
   //     setMouseEnter(true);

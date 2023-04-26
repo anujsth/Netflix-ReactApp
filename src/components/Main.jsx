@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import requests from "../Requests";
 import axios from "axios";
 import Axios from "../axios";
+import MoviePlayer from "../pages/MoviePlayer";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
   // const [seeMore, setSeeMore] = useState(true);
   const movie = movies[Math.floor(Math.random() * movies.length)];
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(requests.requestPopular)
@@ -19,6 +21,10 @@ const Main = () => {
     } else {
       return str;
     }
+  };
+
+  const playHandler = () => {
+    navigate(`/video/${movie.id}`);
   };
 
   return (
@@ -33,7 +39,10 @@ const Main = () => {
         <div className="w-full absolute top-[20%] p-4 md:p-8">
           <h1 className="text-3xl md:text-5xl font-bold">{movie?.title}</h1>
           <div className="my-4">
-            <button className="border text-black bg-gray-300 px-5 py-2 border-gray-300 hover:bg-transparent hover:text-white transition-all">
+            <button
+              onClick={playHandler}
+              className="border text-black bg-gray-300 px-5 py-2 border-gray-300 hover:bg-transparent hover:text-white transition-all"
+            >
               Play
             </button>
             <button className="border text-white  px-5 py-2 border-gray-300 ml-4 hover:bg-white hover:text-black transition-all">
