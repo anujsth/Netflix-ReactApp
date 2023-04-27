@@ -1,19 +1,25 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Movie from "./Movie";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import instance from "../axios";
+import { useDispatch } from "react-redux";
+import { setAllMovie } from "../redux/features/movieDetailSlice";
 
 const Row = ({ title, fetchUrl, rowId }) => {
   const [movies, setMovies] = useState([]);
-
+  const dispatch = useDispatch();
   const containerRef = useRef(null);
+  // const memorizedMovies = useMemo(() => "movies",[movies]);
   useEffect(() => {
     const fetcher = async () => {
-      const res = await axios.get(fetchUrl);
+      const res = await instance.get(fetchUrl);
       setMovies(res.data.results);
+      dispatch(setAllMovie(res.data.results));
     };
     fetcher();
   }, [fetchUrl]);
+
   // console.log(movies[0].id);
   //   const leftArrow = document.querySelector(".leftArrow");
   //   const rightArrow = document.querySelector(".rightArrow");

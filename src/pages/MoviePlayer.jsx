@@ -3,16 +3,15 @@ import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import instance from "../axios";
 
 const MoviePlayer = () => {
   const { id } = useParams();
   const { name } = useSelector((state) => state.movieDetail);
   const [movies, setMovies] = useState(null);
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`
-      )
+    instance
+      .get(`/${id}/videos?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
       .then((res) => setMovies(res.data.results))
       .catch((err) => console.log(err));
   }, []);

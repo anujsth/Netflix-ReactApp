@@ -4,6 +4,7 @@ import Movie from "./Movie";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 const RowUser = ({ title, likedMovie }) => {
+  // const { searchVal } = useSelector((state) => state.search);
   const containerRef = useRef(null);
   const slideLeft = (event) => {
     event.preventDefault();

@@ -4,6 +4,7 @@ import userReducer from "./features/userSlice";
 import movieDetailReducer from "./features/movieDetailSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import searchReducer from "./features/searchSlice";
 import thunk from "redux-thunk";
 
 const persistConfig = {
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   authentication: persistReducer(persistConfig, authenticationReducer),
   user: userReducer,
   movieDetail: movieDetailReducer,
+  search: searchReducer,
 });
 
 // const persistedReducer = persistReducer(persistConfig, authenticationReducer);

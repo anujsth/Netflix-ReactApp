@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp";
 import Protected from "./Protected";
 import { useSelector } from "react-redux";
 import MoviePlayer from "./pages/MoviePlayer";
+import Search from "./pages/Search";
 
 export const router = createBrowserRouter([
   {
@@ -20,4 +21,5 @@ export const router = createBrowserRouter([
     element: <SignUp />,
   },
   { path: "/video/:id", element: <MoviePlayer /> },
+  { path: "/search", element: <Search /> },
 ]);

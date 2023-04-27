@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import requests from "../Requests";
 import axios from "axios";
 import Axios from "../axios";
 import MoviePlayer from "../pages/MoviePlayer";
 import { Navigate, useNavigate } from "react-router-dom";
+import { likeHandler } from "../redux/features/authenticationSlice";
+import { useDispatch } from "react-redux";
+import instance from "../axios";
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
+  const heartClick = useRef(null);
+  const dispatch = useDispatch();
   // const [seeMore, setSeeMore] = useState(true);
   const movie = movies[Math.floor(Math.random() * movies.length)];
   const navigate = useNavigate();
   useEffect(() => {
-    axios
+    instance
       .get(requests.requestPopular)
       .then((res) => setMovies(res.data.results));
   }, []);
@@ -25,6 +30,12 @@ const Main = () => {
 
   const playHandler = () => {
     navigate(`/video/${movie.id}`);
+  };
+
+  const watchHandler = (event) => {
+    if (heartClick.current === event.currentTarget) {
+      dispatch(likeHandler(movie));
+    }
   };
 
   return (
@@ -45,7 +56,11 @@ const Main = () => {
             >
               Play
             </button>
-            <button className="border text-white  px-5 py-2 border-gray-300 ml-4 hover:bg-white hover:text-black transition-all">
+            <button
+              ref={heartClick}
+              onClick={watchHandler}
+              className="border text-white  px-5 py-2 border-gray-300 ml-4 hover:bg-white hover:text-black transition-all"
+            >
               Watch Later
             </button>
           </div>

@@ -43,7 +43,6 @@ const authenticationSlice = createSlice({
     },
     likeHandler: (state, action) => {
       state.likedMovie = [...state.likedMovie, action.payload];
-      console.log(state.likedMovie);
     },
   },
 });
